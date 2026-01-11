@@ -20,7 +20,7 @@ const Result = () => {
       dusty: "bg-yellow-400",
       snowy: "bg-cyan-500",
       bird_drop: "bg-orange-500",
-      electrical_damage: "bg-red-500",
+      electrical_damage: "bg-red-600",
       physical_damage: "bg-purple-600",
     };
     return colors[prediction] || "bg-indigo-500";
@@ -98,7 +98,36 @@ const Result = () => {
             {/* Recommendation */}
             <div className="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">💡 Recommendation</h3>
-              <p className="text-gray-700">{result.recommendation}</p>
+
+              {/* Title */}
+              <p className="font-medium text-gray-800 mb-3">
+                {result.recommendation.title}
+              </p>
+
+              {/* 🟢 Minor Issues */}
+              {result.recommendation.severity === "minor" && (
+                <ul className="list-disc pl-6 space-y-2 text-gray-700">
+                  {result.recommendation.steps.map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
+                </ul>
+              )}
+
+              {/* 🔴 Major Issues */}
+              {result.recommendation.severity === "major" && (
+                <div className="space-y-3">
+                  <p className="text-red-600 font-semibold">
+                    {result.recommendation.warning}
+                  </p>
+
+                  <button
+                    onClick={() => navigate("/booking")}
+                    className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                  >
+                    Hire Certified Technician
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Confidence */}
@@ -115,12 +144,14 @@ const Result = () => {
 
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => navigate("/booking")}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-              >
-                Book Cleaning Service
-              </button>
+              {result.recommendation.severity === "minor" && (
+                <button
+                  onClick={() => navigate("/booking")}
+                  className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  Book Cleaning Service
+                </button>
+              )}
 
               <button
                 onClick={() => navigate("/upload")}
