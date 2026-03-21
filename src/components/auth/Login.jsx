@@ -174,24 +174,7 @@ const Login = () => {
           </Divider>
 
           {/* Social Login Options */}
-          <div className="social-login">
-            <Button
-              icon={<GoogleOutlined />}
-              className="social-button google"
-              size="large"
-              onClick={() => message.info('Google login coming soon!')}
-            >
-              Continue with Google
-            </Button>
-            <Button
-              icon={<GithubOutlined />}
-              className="social-button github"
-              size="large"
-              onClick={() => message.info('GitHub login coming soon!')}
-            >
-              Continue with GitHub
-            </Button>
-          </div>
+         
 
           <div className="register-section">
             <Text type="secondary">Don't have an account? </Text>
