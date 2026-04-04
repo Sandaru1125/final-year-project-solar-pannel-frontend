@@ -184,26 +184,7 @@ const Login = () => {
           </div>
         </Form>
 
-        {/* Demo Credentials */}
-        <div className="demo-credentials">
-          <Divider plain>
-            <Text type="secondary">Demo Credentials</Text>
-          </Divider>
-          <div className="credentials-grid">
-            <div className="cred-item">
-              <Text type="secondary">User:</Text>
-              <Text code>user@example.com / password123</Text>
-            </div>
-            <div className="cred-item">
-              <Text type="secondary">Technician:</Text>
-              <Text code>tech@example.com / password123</Text>
-            </div>
-            <div className="cred-item">
-              <Text type="secondary">Admin:</Text>
-              <Text code>admin / admin123</Text>
-            </div>
-          </div>
-        </div>
+    
       </Card>
     </div>
   );

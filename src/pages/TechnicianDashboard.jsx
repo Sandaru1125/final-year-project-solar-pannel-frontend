@@ -48,6 +48,7 @@ const TechnicianDashboard = () => {
     { title: 'Booking Date', dataIndex: 'preferredDate', render: (date) => dayjs(date).format('YYYY-MM-DD') },
     { title: 'Client Name', dataIndex: 'name' },
     { title: 'Panel Issue', dataIndex: 'panelIssue', render: (issue) => <Tag color="red">{issue}</Tag> },
+    { title: 'Address', dataIndex: 'address' },
     { title: 'Telephone', dataIndex: 'telephone' },
     { 
       title: 'Status', 

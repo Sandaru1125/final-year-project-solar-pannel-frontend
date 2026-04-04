@@ -186,6 +186,7 @@ const UserDashboard = () => {
         preferredDate: values.preferredDate.format('YYYY-MM-DD'),
         preferredTime: values.preferredTime,
         imageUrl: predictionData.imageUrl,
+        address: values.address,
         prediction: predictionData.prediction,
         technicianId: selectedTechnician._id,
         technicianName: selectedTechnician.firstName ? `${selectedTechnician.firstName} ${selectedTechnician.lastName}` : selectedTechnician.name,
@@ -380,29 +381,7 @@ const UserDashboard = () => {
           </div>
         </Card>
 
-        {/* Progress Steps */}
-        <Card style={{ marginBottom: '24px', borderRadius: '12px' }}>
-          <Steps
-            current={activeStep}
-            items={[
-              {
-                title: 'Upload Image',
-                description: 'Take a photo of your solar panel',
-                icon: <UploadOutlined />,
-              },
-              {
-                title: 'Get Analysis',
-                description: 'AI-powered issue detection',
-                icon: <ExperimentOutlined />,
-              },
-              {
-                title: 'Book Technician',
-                description: 'Schedule a service visit',
-                icon: <TeamOutlined />,
-              },
-            ]}
-          />
-        </Card>
+       
 
         <Row gutter={[24, 24]}>
           {/* Left Column - Image Upload */}
@@ -476,15 +455,42 @@ const UserDashboard = () => {
                 <Result
                   status="success"
                   title="Issue Detected"
-                  subTitle={predictionData.prediction.toUpperCase()}
+                  subTitle={
+  <span style={{ fontWeight: 'bold', fontSize: '20px', color: '#1677ff' }}>
+    {predictionData.prediction.toUpperCase()}
+  </span>
+}
                   extra={[
-                    <Alert
-                      message="Recommendation"
-                      description={predictionData.recommendation}
-                      type="info"
-                      showIcon
-                      style={{ textAlign: 'left' }}
-                    />
+                   <Alert
+  message="Recommendation"
+  description={
+    <div>
+      {predictionData.recommendation
+        .split("\n")
+        .filter(line => line.trim() !== "")
+        .map((line, index) => {
+          // Title (like "Steps to clean:")
+          if (!line.match(/^\d+\./)) {
+            return (
+              <p key={index} style={{ fontWeight: "bold", marginBottom: "5px" }}>
+                {line}
+              </p>
+            );
+          }
+
+          // Steps (1,2,3...)
+          return (
+            <li key={index} style={{ marginLeft: "20px" }}>
+              {line.replace(/^\d+\.\s*/, "")}
+            </li>
+          );
+        })}
+    </div>
+  }
+  type="info"
+  showIcon
+  style={{ textAlign: "left" }}
+/>
                   ]}
                   style={{ padding: '20px 0' }}
                 />
@@ -668,6 +674,26 @@ const UserDashboard = () => {
                 <Option value="16:00">04:00 PM</Option>
               </Select>
             </Form.Item>
+
+
+
+             <Form.Item 
+              name="address" 
+              label="Your Address" 
+              rules={[{ required: true, message: 'Please enter your address!' }]}
+>
+                    <Input.TextArea 
+                  placeholder="Enter your full address"
+                  prefix={<EnvironmentOutlined />}
+                  rows={3}
+                     />
+              </Form.Item>
+
+
+
+
+
+
 
             <Divider />
 

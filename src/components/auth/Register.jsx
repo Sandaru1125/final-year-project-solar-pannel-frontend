@@ -158,6 +158,11 @@ const Register = () => {
             />
           </Form.Item>
 
+             
+
+
+
+
           <Form.Item
             name="agreement"
             valuePropName="checked"
